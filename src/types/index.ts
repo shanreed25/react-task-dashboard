@@ -14,4 +14,12 @@ export interface Task {
   createdAt: string;
 }
 
+export interface TaskItemProps {
+  task: Task;
 
+}
+
+
+export interface TaskListProps {
+  tasks: Task[]; 
+}
