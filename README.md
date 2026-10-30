@@ -39,8 +39,15 @@ App
 
 
 ## Utility Functions
-| Function     | Signature                        | Purpose                                                                 |
-| ------------ | -------------------------------- | ----------------------------------------------------------------------- |
-| `parseDate`  | `(dueDate: string) => Date`      | Builds a local date from `"YYYY-MM-DD"` to avoid the UTC off-by-one bug |
-| `formatDate` | `(dueDate: string) => string`    | `"2026-11-05"` becomes `"Nov 5, 2026"`                                  |
-| `isOverdue`  | `(task: Task) => boolean`        | Due date before today and status not `'completed'`                      |
+| Function          | Signature                        | Purpose                                                                   |
+| ----------------- | -------------------------------- | ------------------------------------------------------------------------- |
+| `parseDate`       | `(dueDate: string) => Date`      | Builds a local date from `"YYYY-MM-DD"` to avoid the UTC off-by-one bug   |
+| `formatDate`      | `(dueDate: string) => string`    | `"2026-11-05"` becomes `"Nov 5, 2026"`                                    |
+| `isOverdue`       | `(task: Task) => boolean`        | Due date before today and status not `'completed'`                        |
+| `getStatusStyles` | `(status: TaskStatus) => string` | Returns the Tailwind color classes for the status dropdown in `TaskItem`  |
+
+
+
+| User action   | Starts in | Callback                            | Dashboard handler         |
+| ------------- | --------- | ----------------------------------- | ------------------------- |
+| Change status | TaskItem  | `onStatusChange(taskId, newStatus)` | Update that task's status |
