@@ -1,6 +1,8 @@
 import type { TaskListProps } from "../../types"
 import TaskItem from "./TaskItem"
 
+//displays each task in a list
+//tasks data comes from Dashboard
 function TaskList({tasks}: TaskListProps) {
   console.log(tasks);
   return (

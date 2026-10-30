@@ -9,7 +9,7 @@ return that date
 import type { Task } from "../types";
 
 // builds and returns the Date 2026-10-20T07:00:00.000Z
-export  function parseDate(date: string): Date{
+export  function parseDate(dueDate: string): Date{
     //date.split("-"): splits the date string on "-"
         //'2026-10-20' becomes [ '2026', '10', '20' ]
     //.map(Number): converts each item to a number
@@ -19,7 +19,7 @@ export  function parseDate(date: string): Date{
         // 2026 is the vaue of year 
         // 10 is the value of month
         // 20 is the value of day
-    const [year, month, day] = date.split("-").map(Number);
+    const [year, month, day] = dueDate.split("-").map(Number);
 
     //create a new Date using year, month minus 1, day
         //month minus 1 because month is zero-based
@@ -33,10 +33,11 @@ export  function parseDate(date: string): Date{
 }
 
 //format the date to 'Oct 20, 2026'
-export function formatDate(date: string): string{
-    return parseDate(date).toLocaleDateString('en-US', { dateStyle: 'medium' })//'Oct 20, 2026'
+export function formatDate(dueDate: string): string{
+    return parseDate(dueDate).toLocaleDateString('en-US', { dateStyle: 'medium' })//'Oct 20, 2026'
 }
 
+//check if due date is before today and that the status is not complete
 export function isOverDue(task: Task): boolean{
     const currentDay = new Date();
     currentDay.setHours(0, 0, 0, 0)//remove time

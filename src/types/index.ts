@@ -16,7 +16,6 @@ export interface Task {
 
 export interface TaskItemProps {
   task: Task;
-
 }
 
 

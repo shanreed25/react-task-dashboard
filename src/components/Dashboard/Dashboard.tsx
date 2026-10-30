@@ -6,10 +6,9 @@ import { useState } from "react";
 import { mockTasks } from "../../data/mockTasks";
 import type { Task } from "../../types";
 
-
+//holds task shared state
 function Dashboard() {
   const [tasks, setTasks] = useState<Task[]>(mockTasks)
-  console.log(tasks);
   return (
     <>
       <nav>
