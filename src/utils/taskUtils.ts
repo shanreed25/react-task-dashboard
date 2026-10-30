@@ -6,8 +6,10 @@ create a new Date using year, month minus 1, day
 return that date
 */
 
+import type { Task } from "../types";
 
-export function parseDate(date: string){
+// builds and returns the Date 2026-10-20T07:00:00.000Z
+export  function parseDate(date: string): Date{
     //date.split("-"): splits the date string on "-"
         //'2026-10-20' becomes [ '2026', '10', '20' ]
     //.map(Number): converts each item to a number
@@ -27,7 +29,21 @@ export function parseDate(date: string){
 
     const parsedDate = new Date(year, indexedMonth, day)//2026-10-20T07:00:00.000Z
 
-    console.log(parsedDate);
+    return parsedDate
+}
 
-    return parsedDate.toLocaleDateString('en-US', { dateStyle: 'medium' })//'Oct 20, 2026'
+//format the date to 'Oct 20, 2026'
+export function formatDate(date: string): string{
+    return parseDate(date).toLocaleDateString('en-US', { dateStyle: 'medium' })//'Oct 20, 2026'
+}
+
+export function isOverDue(task: Task): boolean{
+    const currentDay = new Date();
+    currentDay.setHours(0, 0, 0, 0)//remove time
+    const overDue = task.status !== "completed" && 
+                    parseDate(task.dueDate) < currentDay
+
+    return overDue;
+
+
 }
