@@ -2,7 +2,7 @@ import TaskList from "../TaskList/TaskList";
 import TaskForm from "../TaskForm/TaskForm";
 import TaskFilter from "../TaskFilter/TaskFilter";
 import { SunIcon } from "@heroicons/react/24/outline";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { mockTasks } from "../../data/mockTasks";
 import type { Task, TaskStatus } from "../../types";
 
@@ -10,14 +10,13 @@ import type { Task, TaskStatus } from "../../types";
 function Dashboard() {
   const [tasks, setTasks] = useState<Task[]>(mockTasks)
 
-  
-
-  function handleStatusChange(taskId: string, newStatus: TaskStatus){
-      setTasks(prev => prev.map((task) =>
+  const handleStatusChange = useCallback((taskId: string, newStatus: TaskStatus) => {
+          setTasks(prev => prev.map((task) =>
         task.id === taskId ? {...task, status : newStatus} : task
         )
       )
-  };
+  }, [])
+
 
   return (
     <>
