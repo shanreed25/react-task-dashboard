@@ -3,9 +3,9 @@ import Dashboard from "./components/Dashboard/Dashboard"
 
 function App() {
   return (
-    <main>
+    <div>
       <Dashboard />
-    </main>
+    </div>
   )
 }
 

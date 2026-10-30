@@ -1,6 +1,6 @@
 export type TaskStatus = 'pending' | 'in-progress' | 'completed';
 export type TaskPriority = 'low' | 'medium' | 'high';
-export type TaskCategory = 'work' | 'personal' | 'school' | 'other'
+export type TaskCategory = 'setup' | 'ui' | 'feature' | 'testing' | 'deployment'
 
 
 export interface Task {
