@@ -1,6 +1,22 @@
 # React Task Management Dashboard
 
 
+
+## Project Structure
+```
+App
+└── Dashboard          owns the tasks state
+    ├── TaskForm       placeholder
+    ├── TaskFilter     placeholder
+    └── TaskList       tasks={tasks}
+        └── TaskItem   key={task.id} task={task}
+```
+- **`App`:** Renders Dashboard inside `<main>`
+- **`Dashboard`**: Holds tasks, and passes tasks to `TaskList`
+- **`TaskList`**: Maps over tasks and renders one `TaskItem` per task
+- **`TaskItem`**: Shows the task's fields, the formatted due date, and the OVERDUE label
+
+
 ## Union Types
 | Name           | Purpose                                                            | Used by                                              |
 | -------------- | ------------------------------------------------------------------ | ---------------------------------------------------- |

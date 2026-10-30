@@ -1,16 +1,21 @@
 import type { TaskListProps } from "../../types"
 import TaskItem from "./TaskItem"
 
-//displays each task in a list
-//tasks data comes from Dashboard
-function TaskList({tasks}: TaskListProps) {
-  console.log(tasks);
+/*
+maps over tasks and renders one TaskItem per task
+tasks data comes from Dashboard
+*/
+function TaskList({tasks, onStatusChange}: TaskListProps) {
   return (
     <>
       <h2 className="text-3xl font-bold text-orange-600 border border-teal-600">Task List</h2>
 
       {tasks.map((task) => (
-        <TaskItem key={task.id} task={task}/>
+        <TaskItem 
+        key={task.id} 
+        task={task}
+        onStatusChange={onStatusChange}
+        />
       ))}
       
     </>

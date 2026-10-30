@@ -4,11 +4,21 @@ import TaskFilter from "../TaskFilter/TaskFilter";
 import { SunIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import { mockTasks } from "../../data/mockTasks";
-import type { Task } from "../../types";
+import type { Task, TaskStatus } from "../../types";
 
 //holds task shared state
 function Dashboard() {
   const [tasks, setTasks] = useState<Task[]>(mockTasks)
+
+  
+
+  function handleStatusChange(taskId: string, newStatus: TaskStatus){
+      setTasks(prev => prev.map((task) =>
+        task.id === taskId ? {...task, status : newStatus} : task
+        )
+      )
+  };
+
   return (
     <>
       <nav>
@@ -21,7 +31,7 @@ function Dashboard() {
       
       <TaskForm />
       <TaskFilter />
-      <TaskList tasks={tasks}/>
+      <TaskList tasks={tasks} onStatusChange={handleStatusChange}/>
     </>
   );
 }
