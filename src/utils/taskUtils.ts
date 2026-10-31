@@ -6,7 +6,7 @@ create a new Date using year, month minus 1, day
 return that date
 */
 
-import type { Task, TaskStatus } from "../types";
+import type { Task, TaskStatus, TaskPriority } from "../types";
 
 // builds and returns the Date 2026-10-20T07:00:00.000Z
 export function parseDate(dueDate: string): Date {
@@ -64,3 +64,18 @@ export function getStatusStyles(status: TaskStatus): string {
             return "bg-black text-yellow-500"
     }
   }
+
+//returns the Tailwind color classes for the prioirty
+// value based on the task's priority
+export function getPriorityStyles(priority: TaskPriority): string{
+        switch (priority) {
+        case "low":
+            return "text-green-600";
+        case "medium":
+            return "text-amber-500";
+        case "high":
+            return "text-red-600";
+        default:
+            return "text-yellow-500"
+    }
+    }
