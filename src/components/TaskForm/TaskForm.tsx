@@ -1,5 +1,11 @@
 import { useState } from "react";
-import type { TaskFormData, TaskStatus, TaskPriority, TaskCategory } from "../../types";
+import type {
+  TaskFormData,
+  TaskStatus,
+  TaskPriority,
+  TaskCategory,
+  TaskFormProps,
+} from "../../types";
 
 const initialFormData: TaskFormData = {
   title: "",
@@ -10,6 +16,10 @@ const initialFormData: TaskFormData = {
   priority: "medium",
 };
 
+
+/* statusOptions, priorityOptions, and categoryOptions all
+    use .map() to turn each item into an <option>
+*/
 const statusOptions: { value: TaskStatus; label: string }[] = [
   { value: "pending", label: "Pending" },
   { value: "in-progress", label: "In Progress" },
@@ -30,75 +40,122 @@ const categoryOptions: { value: TaskCategory; label: string }[] = [
   { value: "deployment", label: "Deployment" },
 ];
 
-//holds the form's input values here so typing doesn't re-render Dashboard
-function TaskForm() {
+//holds the form input values here so typing doesn't 
+// re-render Dashboard, and sends them up through onSubmit
+function TaskForm({ onSubmit }: TaskFormProps) {
   const [formData, setFormData] = useState<TaskFormData>(initialFormData);
   function handleFormData(
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
   ) {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   }
+
+  function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
+    e.preventDefault();
+    onSubmit(formData);
+    setFormData(initialFormData);
+  }
+
   return (
     <>
       <h2 className="text-3xl font-bold text-purple-600 border border-orange-600">
         Task Form
       </h2>
-      <form>
-        <label htmlFor="title">Task Title</label>
-        <input
-          id="title"
-          name="title"
-          type="text"
-          value={formData.title}
-          onChange={handleFormData}
-        />
+      <form onSubmit={handleSubmit}>
+        <div className="bg-amber-500">
+          <label htmlFor="title">Task Title</label>
+          <input
+            id="title"
+            name="title"
+            type="text"
+            className="border border-b-blue-950"
+            value={formData.title}
+            onChange={handleFormData}
+          />
+        </div>
 
-        <label htmlFor="description">Description</label>
-        <textarea
-          id="description"
-          name="description"
-          rows={6}
-          maxLength={800}
-          value={formData.description}
-          onChange={handleFormData}
-        />
+        <div className="bg-green-500">
+          <label htmlFor="description">Description</label>
+          <textarea
+            id="description"
+            name="description"
+            rows={6}
+            maxLength={800}
+            value={formData.description}
+            className="border border-b-blue-950"
+            onChange={handleFormData}
+          />
+        </div>
 
-        <label htmlFor="dueDate">Due Date</label>
-        <input
-          id="dueDate"
-          name="dueDate"
-          type="date"
-          value={formData.dueDate}
-          onChange={handleFormData}
-        />
+        <div className="bg-purple-500">
+          <label htmlFor="dueDate">Due Date</label>
+          <input
+            id="dueDate"
+            name="dueDate"
+            type="date"
+            value={formData.dueDate}
+            className="border border-b-blue-950"
+            onChange={handleFormData}
+          />
+        </div>
 
-        <label htmlFor="status">Status</label>
-        <select id="status" name="status" value={formData.status}>
-          {statusOptions.map(option =>(
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
+        <div className="bg-blue-500">
+          <label htmlFor="status">Status</label>
+          <select
+            id="status"
+            name="status"
+            value={formData.status}
+            className="border border-b-blue-950"
+            onChange={handleFormData}
+          >
+            {statusOptions.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </div>
 
-        <label htmlFor="priority">Priority</label>
-        <select id="priority" name="priority" value={formData.priority}>
-          {priorityOptions.map(option =>(
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
+        <div className="bg-rose-500">
+          <label htmlFor="priority">Priority</label>
+          <select
+            id="priority"
+            name="priority"
+            value={formData.priority}
+            className="border border-b-blue-950"
+            onChange={handleFormData}
+          >
+            {priorityOptions.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </div>
 
-        <label htmlFor="Category">Category</label>
-        <select id="Category" name="Category" value={formData.category}>
-          {categoryOptions.map(option =>(
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
+        <div className="bg-green-500">
+          <label htmlFor="category">Category</label>
+          <select
+            id="category"
+            name="category"
+            value={formData.category}
+            className="border border-b-blue-950"
+            onChange={handleFormData}
+          >
+            {categoryOptions.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <button type="submit" className="bg-amber-300">
+          Add Task
+        </button>
       </form>
     </>
   );

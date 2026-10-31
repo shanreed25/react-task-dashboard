@@ -4,7 +4,7 @@ import TaskFilter from "../TaskFilter/TaskFilter";
 import { SunIcon } from "@heroicons/react/24/outline";
 import { useCallback, useState } from "react";
 import { mockTasks } from "../../data/mockTasks";
-import type { Task, TaskStatus } from "../../types";
+import type { Task, TaskFormData, TaskStatus } from "../../types";
 
 //holds task shared state
 function Dashboard() {
@@ -27,6 +27,10 @@ function Dashboard() {
     }        
     }, [])
 
+    function handleSubmit(data: TaskFormData){
+      console.log("Form submitted", data)
+    }
+
 
   return (
     <>
@@ -38,7 +42,7 @@ function Dashboard() {
         React Task Management Dashboard
       </h1>
       
-      <TaskForm />
+      <TaskForm onSubmit={handleSubmit} />
       <TaskFilter />
       <TaskList tasks={tasks} onStatusChange={handleStatusChange} onDelete={handleDelete}/>
     </>
