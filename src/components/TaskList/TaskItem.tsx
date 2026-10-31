@@ -1,11 +1,15 @@
 import type { TaskItemProps, TaskStatus } from "../../types"
-import { formatDate, getStatusStyles, isOverDue } from "../../utils/taskUtils";
+import { formatDate, getStatusStyles, isOverdue } from "../../utils/taskUtils";
+import { TrashIcon } from "@heroicons/react/24/outline";
+
 
 /*
 shows the task's fields, the formatted due date, and the OVERDUE label
-task info come from TaskList
+has a status dropdown and a delete icon that report changes through callbacks
+task info and callbacks come from TaskList
 */
-function TaskItem({task, onStatusChange} : TaskItemProps) {
+
+function TaskItem({task, onStatusChange, onDelete} : TaskItemProps) {
   return (
     <div className="text-xl font-bold text-slate-600 border border-purple-400">
       <p>Title: {task.title}</p>
@@ -14,9 +18,10 @@ function TaskItem({task, onStatusChange} : TaskItemProps) {
       <p>Status: {task.status}</p>
       <p>Priority: {task.priority}</p>
       <p>Due Date: {formatDate(task.dueDate)}</p>
-      {isOverDue(task) && <span>OVERDUE</span>}
+      {isOverdue(task) && <span>OVERDUE</span>}
 
       <div className="flex items-center gap-5">
+        <label htmlFor={`task-${task.id}-status`}>Status</label>
         <select
           id={`task-${task.id}-status`}
           name="task-status"
@@ -30,6 +35,12 @@ function TaskItem({task, onStatusChange} : TaskItemProps) {
           <option value="in-progress">In Progress</option>
           <option value="completed">Completed</option>
         </select>
+
+        <button type="button" onClick={() => onDelete(task.id, task.title)} aria-label="Delete">
+          <TrashIcon 
+          className="size-5 cursor-pointer text-red-500"
+          />
+        </button>
       </div>
     </div>
   )

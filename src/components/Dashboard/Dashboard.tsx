@@ -17,6 +17,16 @@ function Dashboard() {
       )
   }, [])
 
+  const handleDelete = useCallback((taskId: string, taskTitle: string) => {
+    const deleteOK = window.confirm(`Are You Sure You Want to Delete Task '${taskTitle}'`)
+    if(deleteOK){
+      setTasks(prev => prev.filter((task) => 
+        task.id !== taskId 
+        )
+      )
+    }        
+    }, [])
+
 
   return (
     <>
@@ -30,7 +40,7 @@ function Dashboard() {
       
       <TaskForm />
       <TaskFilter />
-      <TaskList tasks={tasks} onStatusChange={handleStatusChange}/>
+      <TaskList tasks={tasks} onStatusChange={handleStatusChange} onDelete={handleDelete}/>
     </>
   );
 }

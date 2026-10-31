@@ -48,6 +48,7 @@ App
 
 
 
-| User action   | Starts in | Callback                            | Dashboard handler         |
-| ------------- | --------- | ----------------------------------- | ------------------------- |
-| Change status | TaskItem  | `onStatusChange(taskId, newStatus)` | Update that task's status |
+| User action   | Starts in | Callback                            | Dashboard handler             |
+| ------------- | --------- | ----------------------------------- | ----------------------------- |
+| Change status | TaskItem  | `onStatusChange(taskId, newStatus)` | Update that task's status     |
+| Delete task   | TaskItem  | `onDelete(taskId, taskTitle)`               | Confirm, then remove the task |

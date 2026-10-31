@@ -40,7 +40,7 @@ export function formatDate(dueDate: string): string {
 }
 
 //check if due date is before today and that the status is not complete
-export function isOverDue(task: Task): boolean {
+export function isOverdue(task: Task): boolean {
   const currentDay = new Date();
   currentDay.setHours(0, 0, 0, 0); //remove time
   const overDue =
@@ -50,7 +50,8 @@ export function isOverDue(task: Task): boolean {
 }
 
 
-
+//returns the Tailwind color classes for the status 
+// dropdown based on the task's status
 export function getStatusStyles(status: TaskStatus): string {
         switch (status) {
         case "pending":
