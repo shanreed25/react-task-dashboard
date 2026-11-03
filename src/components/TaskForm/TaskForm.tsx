@@ -41,9 +41,11 @@ const categoryOptions: { value: TaskCategory; label: string }[] = [
 
 const styles = {
   sectionStyles: "px-10 my-5",
-  labelStyles:"text-purple-700 text-sm mb-1 block font-medium",
-  fieldStyles: "w-md py-2 px-3 rounded-lg border border-purple-700 bg-white text-purple-900 shadow-sm",
-  addTaskBtn: "bg-purple-700 px-4 py-2 rounded-md font-semibold text-white shadow-sm hover:bg-purple-600",
+  labelStyles: "text-purple-700 text-sm mb-1 block font-medium",
+  fieldStyles:
+    "w-md py-2 px-3 rounded-lg border border-purple-700 bg-white text-purple-900 shadow-sm",
+  addTaskBtn:
+    "bg-purple-700 px-4 py-2 rounded-md font-semibold text-white shadow-sm hover:bg-purple-600",
 };
 
 //holds the form input values here so typing doesn't
@@ -67,9 +69,7 @@ function TaskForm({ onSubmit }: TaskFormProps) {
 
   return (
     <section className={styles.sectionStyles}>
-      <h2 className="text-3xl font-bold text-purple-600">
-        Task Form
-      </h2>
+      <h2 className="text-3xl font-bold text-purple-600">Task Form</h2>
       <form onSubmit={handleSubmit} className="">
         <div className="mb-5">
           <label htmlFor="title" className={styles.labelStyles}>
@@ -99,70 +99,79 @@ function TaskForm({ onSubmit }: TaskFormProps) {
             onChange={handleFormData}
           />
         </div>
+        <div className="flex gap-5 mb-5 max-w-3xl mx-auto text-center">
+          <div className="">
+            <label htmlFor="dueDate" className={styles.labelStyles}>
+              Due Date
+            </label>
+            <input
+              id="dueDate"
+              name="dueDate"
+              type="date"
+              value={formData.dueDate}
+              className={styles.fieldStyles}
+              onChange={handleFormData}
+            />
+          </div>
 
-        <div className="mb-5">
-          <label htmlFor="dueDate" className={styles.labelStyles}>
-            Due Date
-          </label>
-          <input
-            id="dueDate"
-            name="dueDate"
-            type="date"
-            value={formData.dueDate}
-            className={styles.fieldStyles}
-            onChange={handleFormData}
-          />
+          <div className="">
+            <label htmlFor="status" className={styles.labelStyles}>
+              Status
+            </label>
+            <select
+              id="status"
+              name="status"
+              value={formData.status}
+              className={styles.fieldStyles}
+              onChange={handleFormData}
+            >
+              {statusOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
 
-        <div className="mb-5">
-          <label htmlFor="status" className={styles.labelStyles}>Status</label>
-          <select
-            id="status"
-            name="status"
-            value={formData.status}
-            className={styles.fieldStyles}
-            onChange={handleFormData}
-          >
-            {statusOptions.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-        </div>
+        <div className="flex gap-5 mb-5 max-w-3xl mx-auto text-center">
+          <div className="">
+            <label htmlFor="priority" className={styles.labelStyles}>
+              Priority
+            </label>
+            <select
+              id="priority"
+              name="priority"
+              value={formData.priority}
+              className={styles.fieldStyles}
+              onChange={handleFormData}
+            >
+              {priorityOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </div>
 
-        <div className="mb-5">
-          <label htmlFor="priority" className={styles.labelStyles}>Priority</label>
-          <select
-            id="priority"
-            name="priority"
-            value={formData.priority}
-            className={styles.fieldStyles}
-            onChange={handleFormData}
-          >
-            {priorityOptions.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div className="mb-5">
-          <label htmlFor="category" className={styles.labelStyles}>Category</label>
-          <select
-            id="category"
-            name="category"
-            value={formData.category}
-            className={styles.fieldStyles}
-            onChange={handleFormData}
-          >
-            {categoryOptions.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
+          <div className="">
+            <label htmlFor="category" className={styles.labelStyles}>
+              Category
+            </label>
+            <select
+              id="category"
+              name="category"
+              value={formData.category}
+              className={styles.fieldStyles}
+              onChange={handleFormData}
+            >
+              {categoryOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
 
         <button type="submit" className={styles.addTaskBtn}>
