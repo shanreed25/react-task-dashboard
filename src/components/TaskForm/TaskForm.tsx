@@ -16,7 +16,6 @@ const initialFormData: TaskFormData = {
   priority: "medium",
 };
 
-
 /* statusOptions, priorityOptions, and categoryOptions all
     use .map() to turn each item into an <option>
 */
@@ -40,7 +39,14 @@ const categoryOptions: { value: TaskCategory; label: string }[] = [
   { value: "deployment", label: "Deployment" },
 ];
 
-//holds the form input values here so typing doesn't 
+const styles = {
+  sectionStyles: "px-10 my-5",
+  labelStyles:"text-purple-700 text-sm mb-1 block font-medium",
+  fieldStyles: "w-md py-2 px-3 rounded-lg border border-purple-700 bg-white text-purple-900 shadow-sm",
+  addTaskBtn: "bg-purple-700 px-4 py-2 rounded-md font-semibold text-white shadow-sm hover:bg-purple-600",
+};
+
+//holds the form input values here so typing doesn't
 // re-render Dashboard, and sends them up through onSubmit
 function TaskForm({ onSubmit }: TaskFormProps) {
   const [formData, setFormData] = useState<TaskFormData>(initialFormData);
@@ -60,55 +66,61 @@ function TaskForm({ onSubmit }: TaskFormProps) {
   }
 
   return (
-    <>
-      <h2 className="text-3xl font-bold text-purple-600 border border-orange-600">
+    <section className={styles.sectionStyles}>
+      <h2 className="text-3xl font-bold text-purple-600">
         Task Form
       </h2>
-      <form onSubmit={handleSubmit}>
-        <div className="bg-amber-500">
-          <label htmlFor="title">Task Title</label>
+      <form onSubmit={handleSubmit} className="">
+        <div className="mb-5">
+          <label htmlFor="title" className={styles.labelStyles}>
+            Task Title
+          </label>
           <input
             id="title"
             name="title"
             type="text"
-            className="border border-b-blue-950"
+            className={styles.fieldStyles}
             value={formData.title}
             onChange={handleFormData}
           />
         </div>
 
-        <div className="bg-green-500">
-          <label htmlFor="description">Description</label>
+        <div className="mb-5">
+          <label htmlFor="description" className={styles.labelStyles}>
+            Description
+          </label>
           <textarea
             id="description"
             name="description"
             rows={6}
             maxLength={800}
             value={formData.description}
-            className="border border-b-blue-950"
+            className={styles.fieldStyles}
             onChange={handleFormData}
           />
         </div>
 
-        <div className="bg-purple-500">
-          <label htmlFor="dueDate">Due Date</label>
+        <div className="mb-5">
+          <label htmlFor="dueDate" className={styles.labelStyles}>
+            Due Date
+          </label>
           <input
             id="dueDate"
             name="dueDate"
             type="date"
             value={formData.dueDate}
-            className="border border-b-blue-950"
+            className={styles.fieldStyles}
             onChange={handleFormData}
           />
         </div>
 
-        <div className="bg-blue-500">
-          <label htmlFor="status">Status</label>
+        <div className="mb-5">
+          <label htmlFor="status" className={styles.labelStyles}>Status</label>
           <select
             id="status"
             name="status"
             value={formData.status}
-            className="border border-b-blue-950"
+            className={styles.fieldStyles}
             onChange={handleFormData}
           >
             {statusOptions.map((option) => (
@@ -119,13 +131,13 @@ function TaskForm({ onSubmit }: TaskFormProps) {
           </select>
         </div>
 
-        <div className="bg-rose-500">
-          <label htmlFor="priority">Priority</label>
+        <div className="mb-5">
+          <label htmlFor="priority" className={styles.labelStyles}>Priority</label>
           <select
             id="priority"
             name="priority"
             value={formData.priority}
-            className="border border-b-blue-950"
+            className={styles.fieldStyles}
             onChange={handleFormData}
           >
             {priorityOptions.map((option) => (
@@ -136,13 +148,13 @@ function TaskForm({ onSubmit }: TaskFormProps) {
           </select>
         </div>
 
-        <div className="bg-green-500">
-          <label htmlFor="category">Category</label>
+        <div className="mb-5">
+          <label htmlFor="category" className={styles.labelStyles}>Category</label>
           <select
             id="category"
             name="category"
             value={formData.category}
-            className="border border-b-blue-950"
+            className={styles.fieldStyles}
             onChange={handleFormData}
           >
             {categoryOptions.map((option) => (
@@ -153,11 +165,11 @@ function TaskForm({ onSubmit }: TaskFormProps) {
           </select>
         </div>
 
-        <button type="submit" className="bg-amber-300">
+        <button type="submit" className={styles.addTaskBtn}>
           Add Task
         </button>
       </form>
-    </>
+    </section>
   );
 }
 
