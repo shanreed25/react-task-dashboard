@@ -1,3 +1,16 @@
+import type { Task, TaskStatus, TaskPriority, TaskFormData } from "../types";
+
+
+export function createTask(taskData: TaskFormData): Task{
+  const newTask = {
+    id: crypto.randomUUID(),
+    ...taskData,
+    createdAt: new Date().toISOString()
+  }
+  return newTask
+}
+
+
 /*
 split the date string on "-"
 convert each piece to a number
@@ -5,8 +18,6 @@ name the three numbers year, month, day
 create a new Date using year, month minus 1, day
 return that date
 */
-
-import type { Task, TaskStatus, TaskPriority } from "../types";
 
 // builds and returns the Date 2026-10-20T07:00:00.000Z
 export function parseDate(dueDate: string): Date {
