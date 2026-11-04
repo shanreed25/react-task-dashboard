@@ -1,10 +1,6 @@
 import type { TaskItemProps, TaskStatus } from "../../types";
-import {
-  formatDate,
-  getStatusStyles,
-  isOverdue,
-  getPriorityStyles,
-} from "../../utils/taskUtils";
+import { formatDate, isOverdue } from "../../utils/taskUtils";
+import { getPriorityStyles, getStatusStyles } from "../../utils/taskStyles";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/solid";
 import { memo } from "react";

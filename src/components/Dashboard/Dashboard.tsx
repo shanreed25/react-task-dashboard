@@ -6,12 +6,8 @@ import { useCallback, useState } from "react";
 import type { Task, TaskFormData, TaskStatus } from "../../types";
 import { createTask } from "../../utils/taskUtils";
 import { mockTasks } from "../../data/mockTasks";
+import { dashStyles } from "../../utils/taskStyles";
 
-const styles = {
-  containerStyles: "bg-purple-100 text-white text-center",
-  headerStyles: "bg-purple-700 sticky top-0 z-10 border-b border-yellow-200 shadow-md",
-  taskContent:"max-w-3xl mx-auto text-center"
-};
 
 //holds task shared state
 function Dashboard() {
@@ -44,8 +40,8 @@ function Dashboard() {
   }, [])
 
   return (
-    <div className={styles.containerStyles}>
-      <header className={styles.headerStyles}>
+    <div className={dashStyles.containerStyles}>
+      <header className={dashStyles.headerStyles}>
         <nav>
           <SunIcon className="h-8 w-8" />
         </nav>

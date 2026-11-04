@@ -51,6 +51,7 @@ App
 ## Utility Functions
 | Function            | Signature                                 | Purpose                                                                    |
 | ------------------- | ----------------------------------------- | -------------------------------------------------------------------------- |
+| `createTask`        | `(taskData: TaskFormData): Task`          | Adds an id and createdAt timestamp to the form data and returns a new Task |
 | `parseDate`         | `(dueDate: string) => Date`               | Builds a local date from `"YYYY-MM-DD"` to avoid the UTC off-by-one bug    |
 | `formatDate`        | `(dueDate: string) => string`             | `"2026-11-05"` becomes `"Nov 5, 2026"`                                     |
 | `isOverdue`         | `(task: Task) => boolean`                 | Due date before today and status not `'completed'`                         |
@@ -59,20 +60,20 @@ App
 
 
 ## Form Types
-| Name           | Purpose                                                              | Used by  |
-| -------------- | -------------------------------------------------------------------- | -------- |
+| Name           | Purpose                                                                  | Used by  |
+| -------------- | ------------------------------------------------------------------------ | -------- |
 | `TaskFormData` | The fields a user fills in; leaves out `id` and `createdAt` using `Omit` | TaskForm |
 
 ## Component Props
-| Component  | Prop             | Type                                            | Purpose                           |
-| ---------- | ---------------- | ----------------------------------------------- | --------------------------------- |
-| `TaskList` | `tasks`          | `Task[]`                                        | Tasks to display                  |
-| `TaskList` | `onStatusChange` | `(taskId: string, newStatus: TaskStatus) => void` | Passed down to each `TaskItem`  |
-| `TaskList` | `onDelete`       | `(taskId: string, taskTitle: string) => void`   | Passed down to each `TaskItem`    |
-| `TaskItem` | `task`           | `Task`                                          | The task to display               |
-| `TaskItem` | `onStatusChange` | `(taskId: string, newStatus: TaskStatus) => void` | Reports a new status            |
-| `TaskItem` | `onDelete`       | `(taskId: string, taskTitle: string) => void`   | Reports a delete request          |
-| `TaskForm` | `onSubmit`       | `(data: TaskFormData) => void`                  | Sends the form values up          |
+| Component  | Prop             | Type                                              | Purpose                           |
+| ---------- | ---------------- | ------------------------------------------------- | --------------------------------- |
+| `TaskList` | `tasks`          | `Task[]`                                          | Tasks to display                  |
+| `TaskList` | `onStatusChange` | `(taskId: string, newStatus: TaskStatus) => void` | Passed down to each `TaskItem`    |
+| `TaskList` | `onDelete`       | `(taskId: string, taskTitle: string) => void`     | Passed down to each `TaskItem`    |
+| `TaskItem` | `task`           | `Task`                                            | The task to display               |
+| `TaskItem` | `onStatusChange` | `(taskId: string, newStatus: TaskStatus) => void` | Reports a new status              |
+| `TaskItem` | `onDelete`       | `(taskId: string, taskTitle: string) => void`     | Reports a delete request          |
+| `TaskForm` | `onSubmit`       | `(data: TaskFormData) => void`                    | Sends the form values up          |
 
 
 ## User actions

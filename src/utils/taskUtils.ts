@@ -1,4 +1,4 @@
-import type { Task, TaskStatus, TaskPriority, TaskFormData } from "../types";
+import type { Task, TaskFormData } from "../types";
 
 //adds an id and createdAt timestamp to the form data and returns a full Task
 export function createTask(taskData: TaskFormData): Task{
@@ -11,33 +11,9 @@ export function createTask(taskData: TaskFormData): Task{
 }
 
 
-/*
-split the date string on "-"
-convert each piece to a number
-name the three numbers year, month, day
-create a new Date using year, month minus 1, day
-return that date
-*/
-
 // builds and returns the Date 2026-10-20T07:00:00.000Z
 export function parseDate(dueDate: string): Date {
-  /*date.split("-"): splits the date string on "-"
-    '2026-10-20' becomes [ '2026', '10', '20' ]
-    .map(Number): converts each item to a number
-    [ '2026', '10', '20' ] becomes [ 2026, 10, 20 ]
-    [year, month, day]: destructure to year, month, day variables
-    [ 2026, 10, 20 ]:
-     2026 is the vaue of year
-     10 is the value of month
-     20 is the value of day
-  */
   const [year, month, day] = dueDate.split("-").map(Number);
-
-  /*create a new Date using year, month minus 1, day
-    month minus 1 because month is zero-based
-     date numbers for the months start at 0
-     so January is not 1 it is 0 and December is not 12 it is 11
-  */
   const indexedMonth = month - 1;
   const parsedDate = new Date(year, indexedMonth, day); //2026-10-20T07:00:00.000Z
   return parsedDate;
@@ -61,32 +37,3 @@ export function isOverdue(task: Task): boolean {
 }
 
 
-//returns the Tailwind color classes for the status 
-// dropdown based on the task's status
-export function getStatusStyles(status: TaskStatus): string {
-        switch (status) {
-        case "pending":
-            return "bg-yellow-100 text-yellow-800";
-        case "in-progress":
-            return "bg-white text-blue-700";
-        case "completed":
-            return "bg-white text-green-700";
-        default:
-            return "bg-black text-yellow-500"
-    }
-  }
-
-//returns the Tailwind color classes for the prioirty
-// value based on the task's priority
-export function getPriorityStyles(priority: TaskPriority): string{
-        switch (priority) {
-        case "low":
-            return "text-green-600";
-        case "medium":
-            return "text-amber-500";
-        case "high":
-            return "text-red-600";
-        default:
-            return "text-yellow-500"
-    }
-    }
