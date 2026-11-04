@@ -1,4 +1,4 @@
-import type { Task, TaskFormData } from "../types";
+import type { Task, TaskFormData, TaskFormErrors } from "../types";
 
 //adds an id and createdAt timestamp to the form data and returns a full Task
 export function createTask(taskData: TaskFormData): Task{
@@ -36,4 +36,16 @@ export function isOverdue(task: Task): boolean {
   return overDue;
 }
 
+export function validateForm(data: TaskFormData){
 
+  const formErrors: TaskFormErrors = {}
+  if (data.title.trim() === ''){
+    formErrors.title = 'Title is required'
+  } else if(data.title.trim().length < 3){
+    formErrors.title = 'Please enter more than 3 letters'
+  } else if(data.title.trim().length > 100){
+    formErrors.title = 'The title cannot be more than 100 characters'
+  }
+
+  return formErrors
+}

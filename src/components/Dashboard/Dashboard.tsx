@@ -36,7 +36,7 @@ function Dashboard() {
   const handleSubmit = useCallback((data: TaskFormData) => {
     const newTask = createTask(data)
     setTasks(prev => [...prev, newTask])
-    console.log("Form submitted", newTask);
+    // console.log("Form submitted", newTask);
   }, [])
 
   return (

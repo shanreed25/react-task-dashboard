@@ -7,6 +7,7 @@ import type {
   TaskCategory,
   TaskFormProps,
 } from "../../types";
+import { validateForm } from "../../utils/taskUtils";
 
 const initialFormData: TaskFormData = {
   title: "",
@@ -55,8 +56,15 @@ function TaskForm({ onSubmit }: TaskFormProps) {
 
   function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
     e.preventDefault();
-    onSubmit(formData);
-    setFormData(initialFormData);
+    console.log(Object.keys(validateForm(formData)).length === 0);
+    if(Object.keys(validateForm(formData)).length === 0){
+      onSubmit(formData);
+      setFormData(initialFormData);
+    } else {
+      console.log(Object.values(validateForm(formData)));
+    }
+    
+
   }
 
   return (
