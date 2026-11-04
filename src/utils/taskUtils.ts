@@ -36,16 +36,31 @@ export function isOverdue(task: Task): boolean {
   return overDue;
 }
 
-export function validateForm(data: TaskFormData){
+export function validateField(data: TaskFormData, formErrors: TaskFormErrors, field: keyof TaskFormData): void {
+  const capField = field.charAt(0).toUpperCase() + field.slice(1)
+    if (data[field].trim() === ''){
+      formErrors[field] = `${capField} is required`
+    } else if(data[field].trim().length < 3){
+      formErrors[field] = `${capField} must be at least 3 characters`
+    } else if(data[field].trim().length > 100 && field === "title"){
+        formErrors[field] = `${capField} cannot be more than 100 characters`
+    } else if(data[field].trim().length > 500 && field == "description"){
+        formErrors[field] = `${capField} cannot be more than 500 characters`
+    }
+}
+
+export function validateForm(data: TaskFormData): TaskFormErrors{
 
   const formErrors: TaskFormErrors = {}
-  if (data.title.trim() === ''){
-    formErrors.title = 'Title is required'
-  } else if(data.title.trim().length < 3){
-    formErrors.title = 'Please enter more than 3 letters'
-  } else if(data.title.trim().length > 100){
-    formErrors.title = 'The title cannot be more than 100 characters'
-  }
+  validateField(data, formErrors, "title")
+  validateField(data, formErrors, "description")
+  // if (data.title.trim() === ''){
+  //   formErrors.title = 'Title is required'
+  // } else if(data.title.trim().length < 3){
+  //   formErrors.title = 'Please enter more than 3 letters'
+  // } else if(data.title.trim().length > 100){
+  //   formErrors.title = 'The title cannot be more than 100 characters'
+  // }
 
   return formErrors
 }

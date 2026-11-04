@@ -38,10 +38,11 @@ export const dashStyles = {
 };
 
 export const taskFormStyles = {
-  sectionStyles: "px-10 my-5",
+  sectionStyles: "px-10 my-5 sm:px-10",
   labelStyles: "text-purple-700 text-sm mb-1 block font-medium",
   fieldStyles:
-    "w-md py-2 px-3 rounded-lg border border-purple-700 bg-white text-purple-900 shadow-sm",
-  addTaskBtn:
+    "w-full py-2 px-3 rounded-lg border border-purple-700 bg-white text-purple-900 shadow-sm",
+  pariedRows: "flex gap-5 mb-5 max-w-3xl mx-auto text-center sm:flex-row",
+    addTaskBtn:
     "bg-purple-700 px-4 py-2 rounded-md font-semibold text-white shadow-sm hover:bg-purple-600",
 };

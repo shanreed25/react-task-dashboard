@@ -63,14 +63,13 @@ function TaskForm({ onSubmit }: TaskFormProps) {
     } else {
       console.log(Object.values(validateForm(formData)));
     }
-    
 
   }
 
   return (
     <section className={taskFormStyles.sectionStyles}>
       <h2 className="text-3xl font-bold text-purple-600">Task Form</h2>
-      <form onSubmit={handleSubmit} className="">
+      <form onSubmit={handleSubmit} className="max-w-3xl mx-auto">
         <div className="mb-5">
           <label htmlFor="title" className={taskFormStyles.labelStyles}>
             Task Title
@@ -99,8 +98,8 @@ function TaskForm({ onSubmit }: TaskFormProps) {
             onChange={handleFormData}
           />
         </div>
-        <div className="flex gap-5 mb-5 max-w-3xl mx-auto text-center">
-          <div className="">
+        <div className={taskFormStyles.pariedRows}>
+          <div className="flex-1">
             <label htmlFor="dueDate" className={taskFormStyles.labelStyles}>
               Due Date
             </label>
@@ -114,7 +113,7 @@ function TaskForm({ onSubmit }: TaskFormProps) {
             />
           </div>
 
-          <div className="">
+          <div className="flex-1">
             <label htmlFor="status" className={taskFormStyles.labelStyles}>
               Status
             </label>
@@ -134,8 +133,8 @@ function TaskForm({ onSubmit }: TaskFormProps) {
           </div>
         </div>
 
-        <div className="flex gap-5 mb-5 max-w-3xl mx-auto text-center">
-          <div className="">
+        <div className={taskFormStyles.pariedRows}>
+          <div className="flex-1">
             <label htmlFor="priority" className={taskFormStyles.labelStyles}>
               Priority
             </label>
@@ -154,7 +153,7 @@ function TaskForm({ onSubmit }: TaskFormProps) {
             </select>
           </div>
 
-          <div className="">
+          <div className="flex-1">
             <label htmlFor="category" className={taskFormStyles.labelStyles}>
               Category
             </label>
