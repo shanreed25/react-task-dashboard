@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { taskFormStyles } from "../../utils/taskStyles";
-import type {
+import type  {
   TaskFormData,
   TaskStatus,
   TaskPriority,
   TaskCategory,
   TaskFormProps,
+  TaskFormErrors,
 } from "../../types";
 import { validateForm } from "../../utils/taskUtils";
 
@@ -45,6 +46,9 @@ const categoryOptions: { value: TaskCategory; label: string }[] = [
 // re-render Dashboard, and sends them up through onSubmit
 function TaskForm({ onSubmit }: TaskFormProps) {
   const [formData, setFormData] = useState<TaskFormData>(initialFormData);
+  const [formErrors, setFormErrors] = useState<TaskFormErrors>({});
+
+
   function handleFormData(
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -54,15 +58,19 @@ function TaskForm({ onSubmit }: TaskFormProps) {
     setFormData((prev) => ({ ...prev, [name]: value }));
   }
 
+
   function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
     e.preventDefault();
-    console.log(Object.keys(validateForm(formData)).length === 0);
-    if(Object.keys(validateForm(formData)).length === 0){
+    const validationErrors = validateForm(formData)
+
+    setFormErrors(validationErrors)
+
+
+    // console.log(Object.keys(validationErrors).length === 0);
+    if(Object.keys(validationErrors).length === 0){
       onSubmit(formData);
       setFormData(initialFormData);
-    } else {
-      console.log(Object.values(validateForm(formData)));
-    }
+    } 
 
   }
 
@@ -82,6 +90,7 @@ function TaskForm({ onSubmit }: TaskFormProps) {
             value={formData.title}
             onChange={handleFormData}
           />
+          {formErrors.title && <span className="text-red-500">{formErrors.title}</span>}
         </div>
 
         <div className="mb-5">
@@ -97,6 +106,7 @@ function TaskForm({ onSubmit }: TaskFormProps) {
             className={taskFormStyles.fieldStyles}
             onChange={handleFormData}
           />
+          {formErrors.description && <span className="text-red-500">{formErrors.description}</span>}
         </div>
         <div className={taskFormStyles.pariedRows}>
           <div className="flex-1">
