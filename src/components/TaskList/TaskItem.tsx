@@ -9,9 +9,12 @@ import { memo } from "react";
 shows the task's fields, the formatted due date, and the OVERDUE label
 has a status dropdown and a delete icon that report changes through callbacks
 task info and callbacks come from TaskList
+
+since TaskItem is rendered a lot, if I change one task all the task re-renders
+wrapping it in memo makes only the task being change re-render
 */
 
-function TaskItem({ task, onStatusChange, onDelete }: TaskItemProps) {
+const TaskItem = memo(function TaskItem({ task, onStatusChange, onDelete }: TaskItemProps) {
   return (
     <div className="text-xl font-bold text-slate-600 border border-purple-400">
       <p>Title: {task.title}</p>
@@ -55,6 +58,6 @@ function TaskItem({ task, onStatusChange, onDelete }: TaskItemProps) {
       </div>
     </div>
   );
-}
+})
 
 export default memo(TaskItem);

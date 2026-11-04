@@ -12,6 +12,7 @@ import { dashStyles } from "../../utils/taskStyles";
 //holds task shared state
 function Dashboard() {
   const [tasks, setTasks] = useState<Task[]>(mockTasks);
+  const [taskEdit, setTaskEdit] = useState<Task | null>(null)
 
   const handleStatusChange = useCallback(
     (taskId: string, newStatus: TaskStatus) => {
@@ -37,6 +38,10 @@ function Dashboard() {
     const newTask = createTask(data)
     setTasks(prev => [...prev, newTask])
     // console.log("Form submitted", newTask);
+  }, [])
+
+  const handleEdit = useCallback((task: Task) => {
+    setTaskEdit(task)
   }, [])
 
   return (
