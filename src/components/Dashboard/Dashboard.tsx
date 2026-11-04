@@ -3,9 +3,9 @@ import TaskForm from "../TaskForm/TaskForm";
 import TaskFilter from "../TaskFilter/TaskFilter";
 import { SunIcon } from "@heroicons/react/24/outline";
 import { useCallback, useState } from "react";
-import { mockTasks } from "../../data/mockTasks";
 import type { Task, TaskFormData, TaskStatus } from "../../types";
 import { createTask } from "../../utils/taskUtils";
+import { mockTasks } from "../../data/mockTasks";
 
 const styles = {
   containerStyles: "bg-purple-100 text-white text-center",
@@ -15,7 +15,7 @@ const styles = {
 
 //holds task shared state
 function Dashboard() {
-  const [tasks, setTasks] = useState<Task[]>([]);
+  const [tasks, setTasks] = useState<Task[]>(mockTasks);
 
   const handleStatusChange = useCallback(
     (taskId: string, newStatus: TaskStatus) => {
@@ -37,11 +37,11 @@ function Dashboard() {
     }
   }, []);
 
-  function handleSubmit(data: TaskFormData) {
+  const handleSubmit = useCallback((data: TaskFormData) => {
     const newTask = createTask(data)
     setTasks(prev => [...prev, newTask])
-    console.log("Form submitted", createTask(data));
-  }
+    console.log("Form submitted", newTask);
+  }, [])
 
   return (
     <div className={styles.containerStyles}>

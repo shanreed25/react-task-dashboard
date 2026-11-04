@@ -1,6 +1,6 @@
 import type { Task, TaskStatus, TaskPriority, TaskFormData } from "../types";
 
-
+//adds an id and createdAt timestamp to the form data and returns a full Task
 export function createTask(taskData: TaskFormData): Task{
   const newTask = {
     id: crypto.randomUUID(),
