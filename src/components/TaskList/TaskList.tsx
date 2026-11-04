@@ -6,7 +6,7 @@ maps over tasks and renders one TaskItem per task
 tasks data comes from Dashboard, if there are no tasks a 
 no task message displays
 */
-function TaskList({tasks, onStatusChange, onDelete}: TaskListProps) {
+function TaskList({tasks, onStatusChange, onDelete, onEdit}: TaskListProps) {
   return (
     <>
       <h2 className="text-3xl font-bold text-orange-600 border border-teal-600">Task List</h2>
@@ -18,6 +18,7 @@ function TaskList({tasks, onStatusChange, onDelete}: TaskListProps) {
         task={task}
         onStatusChange={onStatusChange}
         onDelete={onDelete} 
+        onEdit={onEdit}
         />
       )) : <span className="text-3xl">No Tasks Yet</span>
     

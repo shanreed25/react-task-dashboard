@@ -1,7 +1,7 @@
 import type { TaskItemProps, TaskStatus } from "../../types";
 import { formatDate, isOverdue } from "../../utils/taskUtils";
 import { getPriorityStyles, getStatusStyles } from "../../utils/taskStyles";
-import { TrashIcon } from "@heroicons/react/24/outline";
+import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/solid";
 import { memo } from "react";
 
@@ -14,7 +14,7 @@ since TaskItem is rendered a lot, if I change one task all the task re-renders
 wrapping it in memo makes only the task being change re-render
 */
 
-const TaskItem = memo(function TaskItem({ task, onStatusChange, onDelete }: TaskItemProps) {
+const TaskItem = memo(function TaskItem({ task, onStatusChange, onDelete, onEdit }: TaskItemProps) {
   return (
     <div className="text-xl font-bold text-slate-600 border border-purple-400">
       <p>Title: {task.title}</p>
@@ -51,10 +51,20 @@ const TaskItem = memo(function TaskItem({ task, onStatusChange, onDelete }: Task
         <button
           type="button"
           onClick={() => onDelete(task.id, task.title)}
-          aria-label="Delete"
+          aria-label={`Delete $task.title`}
         >
           <TrashIcon className="size-5 cursor-pointer text-red-500" />
         </button>
+
+        <button
+          type="button"
+          onClick={() => onEdit(task)}
+          aria-label={`Edit $task.title`}
+        >
+          <PencilSquareIcon className="size-5 cursor-pointer text-blue-500"/>
+        </button>
+
+
       </div>
     </div>
   );

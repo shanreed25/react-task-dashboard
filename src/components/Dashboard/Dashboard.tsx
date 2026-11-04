@@ -41,6 +41,7 @@ function Dashboard() {
   }, [])
 
   const handleEdit = useCallback((task: Task) => {
+    console.log('Edit button clicked', task);
     setTaskEdit(task)
   }, [])
 
@@ -60,6 +61,7 @@ function Dashboard() {
           tasks={tasks}
           onStatusChange={handleStatusChange}
           onDelete={handleDelete}
+          onEdit={handleEdit}
         />
       </div>
     </div>
